@@ -160,7 +160,7 @@ export const CreatePoll = ({
       options: [],
       hideScores: false,
       hideParticipants: false,
-      requireParticipantEmail: true,
+      requireParticipantEmail: false,
       enableComments: false,
       allowTentativeVotes: true,
       duration: 60,

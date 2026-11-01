@@ -1215,5 +1215,8 @@
   "you": "Du",
   "youAreSignedInAs": "Du bist angemeldet als",
   "yourApiKey": "Dein API-Schlüssel",
-  "yourName": "Dein Name…"
+  "yourName": "Dein Name…",
+  "newParticipantFormEmailOptionalDescription": "Du kannst ohne E-Mail-Adresse antworten. Dann erhältst du keinen Bearbeitungslink und keine Terminbenachrichtigungen per E-Mail.",
+  "newParticipantFormEmailWhy": "Wozu?",
+  "newParticipantFormEmailDescription": "Mit E-Mail-Adresse erhältst du einen Link zum Bearbeiten deiner Antwort und kannst über den endgültigen Termin benachrichtigt werden."
 }

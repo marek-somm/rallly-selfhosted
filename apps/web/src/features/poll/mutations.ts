@@ -13,6 +13,7 @@ import {
 } from "@/features/poll/limit/mutations";
 import type { AuthorizedSpaceId } from "@/features/space/types";
 import { scheduleWebhookDispatch } from "@/features/webhook/mutations";
+import { isSelfHosted } from "@/lib/constants";
 
 export type PollOption = {
   startTime: Date;
@@ -122,7 +123,7 @@ export const createPoll = async ({
         location,
         conferencing,
         timeZone,
-        requireParticipantEmail,
+        requireParticipantEmail: isSelfHosted ? false : requireParticipantEmail,
         hideParticipants,
         hideScores,
         disableComments,
