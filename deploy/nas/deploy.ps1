@@ -12,7 +12,7 @@ try {
     & scp -O -q -o BatchMode=yes -o ConnectTimeout=12 $archive "nas:/tmp/rallly-$revision.tar"
     if ($LASTEXITCODE -ne 0) { throw 'Source transfer failed.' }
     $bootstrap = @'
-import json, pathlib, secrets, shutil, tarfile, urllib.parse
+import json, os, pathlib, secrets, shutil, tarfile, urllib.parse
 revision = '__REVISION__'
 root = pathlib.Path('/volume1/docker/rallly')
 private = pathlib.Path('/volume1/@rallly-secrets')
@@ -82,6 +82,11 @@ source_archive = root / 'source' / ('rallly-' + revision + '.tar.gz')
 with tarfile.open(source_archive, 'w:gz') as target:
     target.add(release, arcname='rallly-' + revision)
 source_archive.chmod(0o644)
+# UGOS also enforces ownership on bind-mounted files for container users.
+# Only public source archives are readable by the Nginx worker (UID 101).
+os.chown(root / 'source', 101, 101)
+(root / 'source').chmod(0o755)
+os.chown(source_archive, 101, 101)
 current_source = root / 'source' / 'rallly-current.tar.gz'
 if current_source.is_symlink(): current_source.unlink()
 if not current_source.exists(): current_source.symlink_to(source_archive.name)
