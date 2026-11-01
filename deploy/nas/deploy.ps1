@@ -25,8 +25,12 @@ release = root / 'releases' / revision
 release.mkdir(exist_ok=True)
 with tarfile.open(archive) as source:
     for member in source.getmembers():
-        if not (release / member.name).resolve().is_relative_to(release.resolve()) or not (member.isfile() or member.isdir()):
+        destination = release / member.name
+        allowed_type = member.isfile() or member.isdir() or member.issym()
+        if not destination.resolve().is_relative_to(release.resolve()) or not allowed_type:
             raise RuntimeError('Unsafe source archive entry')
+        if member.issym() and not (destination.parent / member.linkname).resolve().is_relative_to(release.resolve()):
+            raise RuntimeError('Source symlink escapes release directory')
     source.extractall(release)
 archive.unlink()
 if not (private / 'app.env').exists():
