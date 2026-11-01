@@ -16,6 +16,7 @@ import {
   validateLicenseKeyResponseSchema,
 } from "@/features/licensing/schema";
 import { generateLicenseKey } from "@/features/licensing/utils";
+import { isSelfHosted } from "@/lib/constants";
 import { AppError } from "@/lib/errors/app-error";
 
 const logger = createLogger("licensing/manager");
@@ -104,6 +105,11 @@ export class LicenseManager {
     return createLicenseResponseSchema.parse(await res.json());
   }
   async validateLicenseKey(input: ValidateLicenseInputKeySchema) {
+    if (isSelfHosted) {
+      throw new Error(
+        "Commercial license validation is disabled in this community fork.",
+      );
+    }
     let res: Response;
     try {
       res = await fetch(`${this.apiUrl}/licenses/actions/validate-key`, {

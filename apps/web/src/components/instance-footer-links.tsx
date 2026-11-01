@@ -13,13 +13,14 @@ export function InstanceFooterLinks({
 }: {
   links: { label: string; href: string }[];
 }) {
-  if (links.length === 0) {
-    return null;
-  }
+  const sourceLink = {
+    label: "Community fork · Source (AGPLv3)",
+    href: "/source/rallly-current.tar.gz",
+  };
 
   return (
     <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-      {links.map((link) => (
+      {[...links, sourceLink].map((link) => (
         <a
           key={`${link.href}:${link.label}`}
           href={link.href}

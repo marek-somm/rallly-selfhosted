@@ -3,10 +3,7 @@ import "server-only";
 import { prisma } from "@rallly/database";
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
-import {
-  DEFAULT_SEAT_LIMIT,
-  INSTANCE_LICENSE_TAG,
-} from "@/features/licensing/constants";
+import { INSTANCE_LICENSE_TAG } from "@/features/licensing/constants";
 import { isSelfHosted } from "@/lib/constants";
 
 export function getInstanceLicense() {
@@ -26,45 +23,15 @@ export const cached_getInstanceLicense = unstable_cache(
 );
 
 export const loadInstanceLicense = cache(async () => {
-  if (!isSelfHosted) {
-    return null;
-  }
-
-  const license = await cached_getInstanceLicense();
-
-  if (!license) {
-    return null;
-  }
-
-  return {
-    licenseKey: license.licenseKey,
-    licenseeName: license.licenseeName,
-    licenseeEmail: license.licenseeEmail,
-    issuedAt: license.issuedAt,
-    expiresAt: license.expiresAt,
-    seats:
-      license.seats ??
-      (license.type === "ENTERPRISE" ? Number.POSITIVE_INFINITY : 1),
-    type: license.type,
-    whiteLabelAddon: license.whiteLabelAddon,
-  };
+  // Community fork, 2026-11-01: no commercial instance license is used.
+  return null;
 });
 
 export const getUserLimit = async () => {
-  if (!isSelfHosted) {
-    return Number.POSITIVE_INFINITY;
-  }
-
-  const license = await loadInstanceLicense();
-
-  if (!license) {
-    return DEFAULT_SEAT_LIMIT;
-  }
-
-  return license.seats;
+  return Number.POSITIVE_INFINITY;
 };
 
 export const getWhiteLabelAddon = async () => {
-  const license = await loadInstanceLicense();
-  return license?.whiteLabelAddon ?? false;
+  // Capability of this AGPL fork, not a claim to a purchased license.
+  return isSelfHosted;
 };

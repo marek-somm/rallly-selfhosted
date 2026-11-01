@@ -3,7 +3,6 @@ import "server-only";
 import { cache } from "react";
 import { env } from "@/env";
 import { getInstanceSettings } from "@/features/instance-settings/data";
-import { loadInstanceLicense } from "@/features/licensing/data";
 import { isSelfHosted } from "@/lib/constants";
 import { isMaintenanceModeEnabled } from "@/lib/maintenance";
 import { resolveBrandingConfig } from "./utils";
@@ -49,9 +48,6 @@ export const getInstanceBrandingConfig = cache(async () => {
     // database is unreachable
     return getDefaultBrandingConfig();
   }
-  const license = await loadInstanceLicense();
-  const hasWhiteLabelAddon = license?.whiteLabelAddon ?? false;
-  return hasWhiteLabelAddon
-    ? getCustomBrandingConfig()
-    : getDefaultBrandingConfig();
+  // Community fork: local branding does not require a commercial license.
+  return getCustomBrandingConfig();
 });

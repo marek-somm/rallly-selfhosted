@@ -2,6 +2,12 @@
 
 <img src="./assets/images/app-icon.svg" width="96" height="96" alt="" />
 
+# Rallly Self-Hosted Community Fork
+
+Independent AGPLv3 fork with no commercial self-hosting license checks or seat
+limits. See [what changed](COMMUNITY-FORK.md) and [run it yourself](deploy/nas/README.md).
+Based on the original Rallly project below; not an official upstream release.
+
 # Rallly
 
 **Schedule group meetings, without the back-and-forth**

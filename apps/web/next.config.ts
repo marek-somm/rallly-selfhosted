@@ -15,6 +15,8 @@ const withBundleAnalyzer = createBundleAnalyzer({
 const nextConfig: NextConfig = {
   allowedDevOrigins: [process.env.DEV_DOMAIN ?? "web.rallly.localhost"],
   experimental: {
+    // Keep builds on a shared NAS from consuming every CPU.
+    cpus: 2,
     staleTimes: {
       dynamic: 60,
     },

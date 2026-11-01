@@ -51,7 +51,7 @@ export async function ControlPanelSidebar(
             </NavItem>
             <NavItem href="/control-panel/license">
               <KeySquareIcon className="size-4" />
-              <Trans i18nKey="license" defaults="License" />
+              Source · AGPLv3
             </NavItem>
             <NavItem href="/control-panel/branding">
               <PaletteIcon className="size-4" />
