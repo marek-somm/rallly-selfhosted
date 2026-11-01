@@ -117,7 +117,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/api/auth/callback/oidc",
-        destination: "/api/better-auth/oauth2/callback/oidc",
+        destination: "/api/better-auth/callback/oidc",
         permanent: false,
       },
       {

@@ -21,6 +21,14 @@ allowBuilds:
 
 overrides:
   next@16.3.0: 16.4.2
+  # Compatible security fixes for dependencies in the self-hosted web app.
+  'undici@>=6 <7': 6.29.1
+  'js-cookie@<3.0.7': 3.0.7
+  'cookie@<0.7.0': 0.7.2
+  'body-parser@>=1 <2': 1.20.9
+  'qs@>=6 <7': 6.16.1
+  'mysql2@>=3 <4': 3.23.1
+  'valibot@>=1 <2': 1.4.2
 
 # @hookform/resolvers imports zod/v4/core without declaring zod as a peer,
 # relying on pnpm's hoisted fallback which can flip to zod@3 on re-resolution
@@ -31,3 +39,13 @@ packageExtensions:
     peerDependenciesMeta:
       zod:
         optional: true
+
+minimumReleaseAgeExclude:
+  - '@better-auth/core@1.7.15'
+  - '@better-auth/drizzle-adapter@1.7.15'
+  - '@better-auth/kysely-adapter@1.7.15'
+  - '@better-auth/memory-adapter@1.7.15'
+  - '@better-auth/mongo-adapter@1.7.15'
+  - '@better-auth/prisma-adapter@1.7.15'
+  - '@better-auth/telemetry@1.7.15'
+  - better-auth@1.7.15

@@ -18,6 +18,9 @@ Changes made on **2026-11-01**, based on upstream commit
 - Self-hosted Docker packaging does not enable upstream telemetry or update calls.
   Authentication, authorization, rate limits, email verification and privacy
   controls are preserved.
+- Compatible security updates to the authentication library and web dependencies
+  are included in the committed dependency lockfile. This is a maintained fork,
+  rather than an unmodified copy of upstream's dependencies.
 
 Cloud-only API, webhook scheduling and third-party integrations still depend on
 their actual infrastructure and provider configuration. Removing commercial

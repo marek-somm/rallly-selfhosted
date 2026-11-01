@@ -5,7 +5,9 @@ termine.marek-sommerfeld.de {
         resolvers 1.1.1.1 1.0.0.1
     }
     encode zstd gzip
-    request_body { max_size 10MB }
+    request_body {
+        max_size 10MB
+    }
 
     # Trust CF-Connecting-IP only when the actual socket peer is Cloudflare.
     # Official ranges: https://www.cloudflare.com/ips-v4 and /ips-v6.

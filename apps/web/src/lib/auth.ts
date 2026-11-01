@@ -165,9 +165,6 @@ const isMultiTenantMicrosoft = [
 export const authLib = betterAuth({
   appName: env.APP_NAME,
   secret: env.SECRET_PASSWORD,
-  experimental: {
-    joins: true,
-  },
   emailAndPassword: {
     enabled: env.EMAIL_LOGIN_ENABLED !== "false",
     requireEmailVerification: true,
@@ -386,6 +383,13 @@ export const authLib = betterAuth({
           }
         },
         get: async (key: string) => kv.get(key),
+        getAndDelete: async (key: string) => kv.getdel(key),
+        increment: async (key: string, ttl: number) =>
+          kv.eval<[number], number>(
+            "local n = redis.call('INCR', KEYS[1]); if n == 1 then redis.call('EXPIRE', KEYS[1], ARGV[1]); end; return n",
+            [key],
+            [ttl],
+          ),
         delete: async (key: string) => {
           await kv.del(key);
         },

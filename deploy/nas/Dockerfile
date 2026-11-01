@@ -38,7 +38,7 @@ COPY --from=pruner /src/deploy/nas/start.sh ./start.sh
 COPY --chown=nextjs:nodejs --from=builder /app/apps/web/.next/standalone ./
 COPY --chown=nextjs:nodejs --from=builder /app/apps/web/.next/static ./apps/web/.next/static
 COPY --chown=nextjs:nodejs --from=builder /app/apps/web/public ./apps/web/public
-RUN chmod 755 start.sh
+RUN sed -i 's/\r$//' start.sh && chmod 755 start.sh
 USER nextjs
 ENV NODE_ENV=production
 ENV NEXT_PUBLIC_SELF_HOSTED=true
