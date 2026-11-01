@@ -18,13 +18,11 @@ Changes made on **2026-11-01**, based on upstream commit
 - Self-hosted Docker packaging does not enable upstream telemetry or update calls.
   Authentication, authorization, rate limits, email verification and privacy
   controls are preserved.
+- New polls default to optional participant email. Organizers can still turn on
+  "Require email" for an individual poll; existing polls keep their setting.
 - Compatible security updates to the authentication library and web dependencies
   are included in the committed dependency lockfile. This is a maintained fork,
   rather than an unmodified copy of upstream's dependencies.
-- Participant email addresses are optional on self-hosted installations, including
-  polls created with the old required-email setting. Responses without an address
-  receive no confirmation/edit-link email or event notifications. Session-based
-  editing and the organizer's ability to manage responses remain available.
 
 Cloud-only API, webhook scheduling and third-party integrations still depend on
 their actual infrastructure and provider configuration. Removing commercial

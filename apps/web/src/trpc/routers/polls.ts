@@ -54,7 +54,6 @@ import {
   isSpaceBrandingActive,
 } from "@/features/space/utils";
 import { scheduleWebhookDispatch } from "@/features/webhook/mutations";
-import { isSelfHosted } from "@/lib/constants";
 import {
   wallTimeDiffInMinutes,
   wallTimeToInstant,
@@ -198,10 +197,7 @@ export const polls = router({
         hideScores: z.boolean().optional(),
         disableComments: z.boolean().optional(),
         allowTentativeVotes: z.boolean().optional(),
-        requireParticipantEmail: z
-          .boolean()
-          .optional()
-          .transform((value) => (isSelfHosted ? false : value)),
+        requireParticipantEmail: z.boolean().optional(),
         options: z
           .object({
             startDate: z.string(),
@@ -466,12 +462,7 @@ export const polls = router({
         disableComments: z.boolean().optional(),
         allowTentativeVotes: z.boolean().optional(),
         hideScores: z.boolean().optional(),
-        requireParticipantEmail: z
-          .boolean()
-          .optional()
-          .transform((value) =>
-            value === undefined ? undefined : isSelfHosted ? false : value,
-          ),
+        requireParticipantEmail: z.boolean().optional(),
       }),
     )
     .use(requireUserMiddleware)

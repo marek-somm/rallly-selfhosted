@@ -29,7 +29,6 @@ import {
   VenetianMaskIcon,
 } from "lucide-react";
 import { useFormContext } from "react-hook-form";
-import { IfCloudHosted } from "@/components/environment";
 import { SettingIcon } from "@/components/setting-icon";
 import { showPayWall, useIsFree } from "@/features/billing/client";
 import { ProBadge } from "@/features/billing/components/pro-badge";
@@ -86,38 +85,36 @@ export const PollSettingsForm = ({
       </div>
       <CardContent className="flex flex-col gap-6">
         <FieldGroup variant="divided">
-          <IfCloudHosted>
-            <FormField
-              control={form.control}
-              name="requireParticipantEmail"
-              render={({ field }) => (
-                <Field orientation="horizontal">
-                  <SettingIcon>
-                    <MailIcon />
-                  </SettingIcon>
-                  <FieldContent>
-                    <FieldLabel htmlFor="require-participant-email">
-                      <Trans
-                        i18nKey="requireParticipantEmailTitle"
-                        defaults="Require email"
-                      />
-                    </FieldLabel>
-                    <FieldDescription>
-                      <Trans
-                        i18nKey="requireParticipantEmailDescription"
-                        defaults="Participants must provide an email address to respond."
-                      />
-                    </FieldDescription>
-                  </FieldContent>
-                  <Switch
-                    id="require-participant-email"
-                    checked={!!field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </Field>
-              )}
-            />
-          </IfCloudHosted>
+          <FormField
+            control={form.control}
+            name="requireParticipantEmail"
+            render={({ field }) => (
+              <Field orientation="horizontal">
+                <SettingIcon>
+                  <MailIcon />
+                </SettingIcon>
+                <FieldContent>
+                  <FieldLabel htmlFor="require-participant-email">
+                    <Trans
+                      i18nKey="requireParticipantEmailTitle"
+                      defaults="Require email"
+                    />
+                  </FieldLabel>
+                  <FieldDescription>
+                    <Trans
+                      i18nKey="requireParticipantEmailDescription"
+                      defaults="Participants must provide an email address to respond."
+                    />
+                  </FieldDescription>
+                </FieldContent>
+                <Switch
+                  id="require-participant-email"
+                  checked={!!field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </Field>
+            )}
+          />
           <FormField
             control={form.control}
             name="enableComments"

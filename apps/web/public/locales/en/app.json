@@ -632,7 +632,6 @@
   "newParticipantFormAddNote": "Add a note",
   "newParticipantFormDescription": "Fill in the form below to submit your votes.",
   "newParticipantFormEmailDescription": "We'll email you a link to change your response, and the organizer can let you know the final time.",
-  "newParticipantFormEmailOptionalDescription": "You can respond without an email address. Without one, you won't receive an edit link or event notifications by email.",
   "newParticipantFormEmailWhy": "Why?",
   "newParticipantFormErrorPollFull": "This poll is no longer accepting responses.",
   "newParticipantFormErrorTooManyRequests": "You have made too many attempts. Please wait a while and try again.",

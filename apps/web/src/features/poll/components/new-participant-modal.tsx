@@ -28,7 +28,7 @@ import { PlusIcon } from "lucide-react";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { IfCloudHosted, isSelfHosted } from "@/components/environment";
+import { IfCloudHosted } from "@/components/environment";
 import { Link } from "@/components/link";
 import { usePollOrNull } from "@/features/poll/client";
 import {
@@ -134,8 +134,7 @@ export const NewParticipantForm = (props: NewParticipantModalProps) => {
   const poll = usePollOrNull();
 
   const isEmailRequired =
-    !isSelfHosted &&
-    (props.requireParticipantEmail ?? poll?.requireParticipantEmail ?? false);
+    props.requireParticipantEmail ?? poll?.requireParticipantEmail ?? false;
   const pollId = props.pollId ?? poll?.id;
   const { timeZone } = useDateTimeConfig();
   const { user, createGuestIfNeeded } = useUser();
@@ -373,17 +372,8 @@ export const NewParticipantForm = (props: NewParticipantModalProps) => {
                     {...field}
                   />
                 </FormControl>
-                <FormDescription
-                  className={isEmailRequired ? "sr-only" : undefined}
-                >
-                  {isEmailRequired ? (
-                    emailDescription
-                  ) : (
-                    <Trans
-                      i18nKey="newParticipantFormEmailOptionalDescription"
-                      defaults="You can respond without an email address. Without one, you won't receive an edit link or event notifications by email."
-                    />
-                  )}
+                <FormDescription className="sr-only">
+                  {emailDescription}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
